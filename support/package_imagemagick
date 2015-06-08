@@ -34,7 +34,7 @@ libpng_local_path=$tempdir/libpng-${LIBPNG_VERSION}.tgz
 echo ">>> Downloading libpng sources"
 
 libpng_sources=$tempdir/libpng-${LIBPNG_VERSION}.tar.gz
-curl ftp://ftp.simplesystems.org/pub/libpng/png/src/libpng-${LIBPNG_VERSION}.tar.gz > $libpng_sources
+curl https://inside-buildpacks.s3-website-us-east-1.amazonaws.com/src/libpng-${LIBPNG_VERSION}-src.tgz > $libpng_sources
 
 tar -C $tempdir -x -z -f $libpng_sources
 
@@ -58,7 +58,7 @@ echo ">>> Building imagemagick"
 
 # build and package imagemagick for heroku
 vulcan build -v \
-  -s "http://www.imagemagick.org/download/ImageMagick-${IMAGE_MAGICK_VERSION}.tar.gz" \
+  -s "https://inside-buildpacks.s3-website-us-east-1.amazonaws.com/src/imagemagick-${IMAGE_MAGICK_VERSION}-src.tgz" \
   -n imagemagick \
   -c "cd ImageMagick-${IMAGE_MAGICK_VERSION} && ./configure --prefix=/app/vendor/imagemagick && make install" \
   -o $im_local_path \
